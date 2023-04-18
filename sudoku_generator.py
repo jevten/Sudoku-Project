@@ -263,7 +263,7 @@ def generate_sudoku(size, removed):
     return board
 
 if __name__ == "__main__":
-    sudoku = SudokuGenerator(9,30)
+    sudoku = SudokuGenerator(9,50)
     print("hi")
     sudoku.print_board()
     sudoku.fill_values()
