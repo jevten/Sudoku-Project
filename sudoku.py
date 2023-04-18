@@ -1,11 +1,14 @@
 from sudoku_generator import SudokuGenerator
 import pygame, sys
+from board import Board
+from cell import Cell
 
 
 pygame.init()
 pygame.display.set_caption("Sudoku")
-screen = pygame.display.set_mode((600,600))
+screen = pygame.display.set_mode((600,700))
 game_state = "start_menu"
+bg_color = (193, 237, 247)
 
 def draw_start_menu():
     #load background image
@@ -52,7 +55,10 @@ while True:
                     game_state = "hard"
 
         if game_state == "easy":
-            pass
+            screen.fill(bg_color)
+            board = Board(600, 600, screen, "easy")
+            board.draw()
+
 
         if game_state == "medium":
             pass
