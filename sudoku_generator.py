@@ -261,16 +261,3 @@ def generate_sudoku(size, removed):
     sudoku.remove_cells()
     board = sudoku.get_board()
     return board
-
-if __name__ == "__main__":
-    sudoku = SudokuGenerator(9,50)
-    print("hi")
-    sudoku.print_board()
-    sudoku.fill_values()
-    print("hi")
-    print("hi")
-    sudoku.print_board()
-    sudoku.remove_cells()
-    print("hi")
-    sudoku.print_board()
-    print("hi")
