@@ -25,7 +25,7 @@ class SudokuGenerator:
     def __init__(self, row_length, removed_cells):
         self.row_length = row_length
         self.removed_cells = removed_cells
-        self.box_length = math.sqrt(self.row_length)
+        self.box_length = int(math.sqrt(self.row_length))
         self.board = [[0 for _ in range(row_length)]for _ in range(row_length)]
 
 
@@ -79,7 +79,7 @@ class SudokuGenerator:
     '''
     def valid_in_col(self, col, num):
         for i in range(self.row_length):
-            if num == self.board[i][col]:
+            if num == self.board[i][int(col)]:
                 return False
         return True
 
@@ -141,7 +141,6 @@ class SudokuGenerator:
                     if self.valid_in_box(row_start,col_start,value):
                         break
                 self.board[row_start+i][col_start+j] = value
-                print(self.board[row_start+i][col_start+j])
     
     '''
     Fills the three boxes along the main diagonal of the board
@@ -256,9 +255,9 @@ if __name__ == "__main__":
     sudoku.print_board()
     sudoku.fill_diagonal()
     print("hi")
-    sudoku.fill_remaining(9,9)
     print("hi")
     sudoku.print_board()
+    sudoku.fill_values()
     sudoku.remove_cells()
     print("hi")
     sudoku.print_board()
