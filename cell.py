@@ -6,8 +6,8 @@ class Cell(SudokuGenerator):
         self.row = row
         self.col = col
         self.screen = screen
-        self.SQUARE_SIZE_VERT = int(500 / 8)
-        self.SQUARE_SIZE_HORZ = int(600/8)
+        self.CELL_SIZE_VERT = 600/9
+        self.CELL_SIZE_HORZ = 600/9
 
     def set_cell_value(self, value):
         self.value = value
