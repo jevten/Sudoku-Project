@@ -11,6 +11,15 @@ game_state = "start_menu"
 bg_color = (193, 237, 247)
 count = 0
 easy_board = Board(600, 600, screen, "easy")
+medium_board = Board(600, 600, screen, "medium")
+hard_board = Board(600, 600, screen, "hard")
+font = pygame.font.SysFont('arial', 30)
+reset_message = font.render("Reset",True,(242, 158, 22))
+
+
+
+
+
 
 def draw_start_menu():
     #load background image
@@ -59,6 +68,7 @@ while True:
             if count == 0:
                 screen.fill(bg_color)
                 easy_board.draw()
+                screen.blit(screen,())
                 count += 1
             if event.type == pygame.MOUSEBUTTONDOWN:
                 easy_board.draw()
@@ -120,8 +130,65 @@ while True:
 
 
         if game_state == "medium":
-            pass
-
+            if count == 0:
+                screen.fill(bg_color)
+                medium_board.draw()
+                count += 1
+            if event.type == pygame.MOUSEBUTTONDOWN:
+                medium_board.draw()
+                x,y = event.pos
+                row, col = medium_board.click(x,y)
+                medium_board.select(row,col)
+            if event.type == pygame.KEYDOWN:
+                if medium_board.original_board[row][col]==0:
+                    if event.key == pygame.K_1:
+                        pygame.draw.rect(screen,(193, 237, 247), pygame.Rect(col*600/9+2,row*600/9+2,600/9-4,600/9-4))
+                        medium_board.clear()
+                        medium_board.sketch(1)
+                    if event.key == pygame.K_2:
+                        pygame.draw.rect(screen, (193, 237, 247),pygame.Rect(col * 600 / 9 + 2, row * 600 / 9 + 2, 600 / 9-4, 600 / 9-4))
+                        medium_board.clear()
+                        medium_board.sketch(2)
+                    if event.key == pygame.K_3:
+                        pygame.draw.rect(screen, (193, 237, 247),pygame.Rect(col * 600 / 9 + 2, row * 600 / 9 + 2, 600 / 9 - 4, 600 / 9 - 4))
+                        medium_board.clear()
+                        medium_board.sketch(3)
+                    if event.key == pygame.K_4:
+                        pygame.draw.rect(screen, (193, 237, 247),pygame.Rect(col * 600 / 9 + 2, row * 600 / 9 + 2, 600 / 9 - 4, 600 / 9 - 4))
+                        medium_board.clear()
+                        medium_board.sketch(4)
+                    if event.key == pygame.K_5:
+                        pygame.draw.rect(screen, (193, 237, 247),pygame.Rect(col * 600 / 9 + 2, row * 600 / 9 + 2, 600 / 9 - 4, 600 / 9 - 4))
+                        medium_board.clear()
+                        medium_board.sketch(5)
+                    if event.key == pygame.K_6:
+                        pygame.draw.rect(screen, (193, 237, 247),pygame.Rect(col * 600 / 9 + 2, row * 600 / 9 + 2, 600 / 9 - 4, 600 / 9 - 4))
+                        medium_board.clear()
+                        medium_board.sketch(6)
+                    if event.key == pygame.K_7:
+                        pygame.draw.rect(screen, (193, 237, 247),pygame.Rect(col * 600 / 9 + 2, row * 600 / 9 + 2, 600 / 9 - 4, 600 / 9 - 4))
+                        medium_board.clear()
+                        medium_board.sketch(7)
+                    if event.key == pygame.K_8:
+                        pygame.draw.rect(screen, (193, 237, 247),pygame.Rect(col * 600 / 9 + 2, row * 600 / 9 + 2, 600 / 9 - 4, 600 / 9 - 4))
+                        medium_board.clear()
+                        medium_board.sketch(8)
+                    if event.key == pygame.K_9:
+                        pygame.draw.rect(screen, (193, 237, 247),pygame.Rect(col * 600 / 9 + 2, row * 600 / 9 + 2, 600 / 9 - 4, 600 / 9 - 4))
+                        medium_board.clear()
+                        medium_board.sketch(9)
+                    if event.key == pygame.K_0:
+                        pygame.draw.rect(screen, (193, 237, 247),pygame.Rect(col * 600 / 9 + 2, row * 600 / 9 + 2, 600 / 9 - 4, 600 / 9 - 4))
+                        medium_board.clear()
+                    if event.key == pygame.K_RETURN:
+                        medium_board.list_of_cells[row][col].set_cell_value(medium_board.list_of_cells[row][col].get_sketched_Value())
+                        pygame.draw.rect(screen, (193, 237, 247),pygame.Rect(col * 600 / 9 + 2, row * 600 / 9 + 2, 600 / 9 - 4, 600 / 9 - 4))
+                        medium_board.list_of_cells[row][col].draw()
+            if medium_board.is_full():
+                if medium_board.check_board():
+                    game_state = "win"
+                else:
+                    game_state = "lose"
         if game_state == "hard":
             pass
 
