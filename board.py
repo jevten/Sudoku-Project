@@ -44,13 +44,13 @@ class Board:
 
     def select(self, row, col):
         for i in range(0,2):
-            pygame.draw.line(self.screen,self.LINE_COLOR_SELECT,(col*600/9,(row + i)*600/9),(600/9*(col+1), (row + i)*600/9),5)
+            pygame.draw.line(self.screen,self.LINE_COLOR_SELECT,(col*600/9,(row + i)*600/9),(600/9*(col+1), (row + i)*600/9),2)
         for i in range(0, 2):
-            pygame.draw.line(self.screen, self.LINE_COLOR_SELECT, ((col + i) * 600 / 9, row * 600 / 9),(600/9*(col+i),(row+1)*600/9),5)
+            pygame.draw.line(self.screen, self.LINE_COLOR_SELECT, ((col + i) * 600 / 9, row * 600 / 9),(600/9*(col+i),(row+1)*600/9),2)
         self.selected_cell = (row,col)
 
     def click(self, x, y):
-        if x>600 and x<0 and y>600 and y<0:
+        if x>600 and x<0 and y>700 and y<0:
             return None
         row = 0
         col = 0
@@ -58,7 +58,7 @@ class Board:
             if x>=600/9*i and x<=600/9*(i+1):
                 col = i
             if y >= 600 / 9 * i and y <= 600 / 9 * (i + 1):
-                y=i
+                row=i
         result = (row,col)
         return result
 

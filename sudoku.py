@@ -9,6 +9,8 @@ pygame.display.set_caption("Sudoku")
 screen = pygame.display.set_mode((600,700))
 game_state = "start_menu"
 bg_color = (193, 237, 247)
+count = 0
+easy_board = Board(600, 600, screen, "easy")
 
 def draw_start_menu():
     #load background image
@@ -54,12 +56,17 @@ while True:
                     game_state = "hard"
 
         if game_state == "easy":
-            screen.fill(bg_color)
-            board = Board(600, 600, screen, "easy")
-            board.draw()
+            if count == 0:
+                screen.fill(bg_color)
+                easy_board.draw()
+                count += 1
+            if event.type == pygame.MOUSEBUTTONDOWN:
+                easy_board.draw()
+                x,y = event.pos
+                row, col = easy_board.click(x,y)
+                easy_board.select(row,col)
             pygame.display.update()
-            while True:
-                pass
+
 
 
         if game_state == "medium":
