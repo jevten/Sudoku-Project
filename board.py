@@ -113,7 +113,7 @@ class Board:
     def check_board(self):
         for i in range(0,9):
             for j in range(0,9):
-                if self.board.get_board().SudokuGenerator.is_valid(i,j) == False:
+                if self.board.is_valid(i,j,self.board.get_board()[i][j]) == False:
                     return False
         return True
 
