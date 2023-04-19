@@ -66,34 +66,46 @@ while True:
                 row, col = easy_board.click(x,y)
                 easy_board.select(row,col)
             if event.type == pygame.KEYDOWN:
-                if event.key == pygame.K_1:
-                    easy_board.clear()
-                    easy_board.sketch(1)
-                if event.key == pygame.K_2:
-                    easy_board.clear()
-                    easy_board.sketch(2)
-                if event.key == pygame.K_3:
-                    easy_board.clear()
-                    easy_board.sketch(3)
-                if event.key == pygame.K_4:
-                    easy_board.clear()
-                    easy_board.sketch(4)
-                if event.key == pygame.K_5:
-                    easy_board.clear()
-                    easy_board.sketch(5)
-                if event.key == pygame.K_6:
-                    easy_board.clear()
-                    easy_board.sketch(6)
-                if event.key == pygame.K_7:
-                    easy_board.clear()
-                    easy_board.sketch(7)
-                if event.key == pygame.K_8:
-                    easy_board.clear()
-                    easy_board.sketch(8)
-                if event.key == pygame.K_9:
-                    easy_board.clear()
-                    easy_board.sketch(9)
-
+                if easy_board.original_board[row][col]==0:
+                    if event.key == pygame.K_1:
+                        pygame.draw.rect(screen,(193, 237, 247), pygame.Rect(col*600/9+2,row*600/9+2,600/9-4,600/9-4))
+                        easy_board.clear()
+                        easy_board.sketch(1)
+                    if event.key == pygame.K_2:
+                        pygame.draw.rect(screen, (193, 237, 247),pygame.Rect(col * 600 / 9 + 2, row * 600 / 9 + 2, 600 / 9-4, 600 / 9-4))
+                        easy_board.clear()
+                        easy_board.sketch(2)
+                    if event.key == pygame.K_3:
+                        pygame.draw.rect(screen, (193, 237, 247),pygame.Rect(col * 600 / 9 + 2, row * 600 / 9 + 2, 600 / 9 - 4, 600 / 9 - 4))
+                        easy_board.clear()
+                        easy_board.sketch(3)
+                    if event.key == pygame.K_4:
+                        pygame.draw.rect(screen, (193, 237, 247),pygame.Rect(col * 600 / 9 + 2, row * 600 / 9 + 2, 600 / 9 - 4, 600 / 9 - 4))
+                        easy_board.clear()
+                        easy_board.sketch(4)
+                    if event.key == pygame.K_5:
+                        pygame.draw.rect(screen, (193, 237, 247),pygame.Rect(col * 600 / 9 + 2, row * 600 / 9 + 2, 600 / 9 - 4, 600 / 9 - 4))
+                        easy_board.clear()
+                        easy_board.sketch(5)
+                    if event.key == pygame.K_6:
+                        pygame.draw.rect(screen, (193, 237, 247),pygame.Rect(col * 600 / 9 + 2, row * 600 / 9 + 2, 600 / 9 - 4, 600 / 9 - 4))
+                        easy_board.clear()
+                        easy_board.sketch(6)
+                    if event.key == pygame.K_7:
+                        pygame.draw.rect(screen, (193, 237, 247),pygame.Rect(col * 600 / 9 + 2, row * 600 / 9 + 2, 600 / 9 - 4, 600 / 9 - 4))
+                        easy_board.clear()
+                        easy_board.sketch(7)
+                    if event.key == pygame.K_8:
+                        pygame.draw.rect(screen, (193, 237, 247),pygame.Rect(col * 600 / 9 + 2, row * 600 / 9 + 2, 600 / 9 - 4, 600 / 9 - 4))
+                        easy_board.clear()
+                        easy_board.sketch(8)
+                    if event.key == pygame.K_9:
+                        pygame.draw.rect(screen, (193, 237, 247),pygame.Rect(col * 600 / 9 + 2, row * 600 / 9 + 2, 600 / 9 - 4, 600 / 9 - 4))
+                        easy_board.clear()
+                        easy_board.sketch(9)
+                    if event.key == pygame.K_0:
+                        pygame.draw.rect(screen, (193, 237, 247),pygame.Rect(col * 600 / 9 + 2, row * 600 / 9 + 2, 600 / 9 - 4, 600 / 9 - 4))
+                        easy_board.clear()
             pygame.display.update()
 
 

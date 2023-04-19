@@ -21,6 +21,7 @@ class Board:
         if difficulty == "hard":
             self.board = SudokuGenerator(9,50)
         self.board.fill_values()
+        self.original_board = self.board.get_board()
         self.board.remove_cells()
         for i in range(0,9):
             for j in range(0,9):
@@ -63,23 +64,28 @@ class Board:
         return result
 
     def clear(self):
+
         i, j = self.selected_cell
         self.list_of_cells[i][j] = Cell(0,i,j,self.screen)
 
     def sketch(self,value):
         i, j = self.selected_cell
+        if self.original_board[i][j] >0:
+            return None
         self.list_of_cells[i][j].set_sketched_value(value)
         self.list_of_cells[i][j].draw_sketched_value()
 
     def place_number(self,value):
         i, j = self.selected_cell
+        if self.original_board[i][j] >0:
+            return None
         self.list_of_cells[i][j].set_cell_value(value)
         self.list_of_cells[i][j].draw()
 
     def reset_to_original(self):
         for i in range(0,9):
             for j in range(0,9):
-                self.list_of_cells[i][j] = Cell(self.board.get_board()[i][j], i, j ,self.screen)
+                self.list_of_cells[i][j] = self.original_board[i][j]
 
     def is_full(self):
         count = 0
