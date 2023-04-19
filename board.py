@@ -34,9 +34,9 @@ class Board:
             pygame.draw.line(self.screen, self.LINE_COLOR_CELL, (0,i*600/9),(self.width, i*600/9),2)
         for i in range(1,9):
             pygame.draw.line(self.screen,self.LINE_COLOR_CELL,(i * 600/9,0), (600/9 * i, self.height),3)
-        for i in range(1, 4):
+        for i in range(0, 4):
             pygame.draw.line(self.screen, self.LINE_COLOR_BOX, (0, i * self.SQUARE_SIZE_VERT), (self.width, i * self.SQUARE_SIZE_VERT), 5)
-        for i in range(1, 3):
+        for i in range(0, 4):
             pygame.draw.line(self.screen, self.LINE_COLOR_BOX, (i * self.SQUARE_SIZE_HORZ,0), (self.SQUARE_SIZE_HORZ * i, self.height), 5)
         for i in range (0,9):
             for j in range(0,9):

@@ -6,7 +6,7 @@ from cell import Cell
 
 pygame.init()
 pygame.display.set_caption("Sudoku")
-screen = pygame.display.set_mode((600,700))
+screen = pygame.display.set_mode((602,700))
 game_state = "start_menu"
 bg_color = (193, 237, 247)
 count = 0
@@ -65,6 +65,35 @@ while True:
                 x,y = event.pos
                 row, col = easy_board.click(x,y)
                 easy_board.select(row,col)
+            if event.type == pygame.KEYDOWN:
+                if event.key == pygame.K_1:
+                    easy_board.clear()
+                    easy_board.sketch(1)
+                if event.key == pygame.K_2:
+                    easy_board.clear()
+                    easy_board.sketch(2)
+                if event.key == pygame.K_3:
+                    easy_board.clear()
+                    easy_board.sketch(3)
+                if event.key == pygame.K_4:
+                    easy_board.clear()
+                    easy_board.sketch(4)
+                if event.key == pygame.K_5:
+                    easy_board.clear()
+                    easy_board.sketch(5)
+                if event.key == pygame.K_6:
+                    easy_board.clear()
+                    easy_board.sketch(6)
+                if event.key == pygame.K_7:
+                    easy_board.clear()
+                    easy_board.sketch(7)
+                if event.key == pygame.K_8:
+                    easy_board.clear()
+                    easy_board.sketch(8)
+                if event.key == pygame.K_9:
+                    easy_board.clear()
+                    easy_board.sketch(9)
+
             pygame.display.update()
 
 
