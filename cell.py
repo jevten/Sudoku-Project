@@ -18,6 +18,6 @@ class Cell(SudokuGenerator):
     def draw(self):
         if self.value != 0:
             font = pygame.font.SysFont('arial', 40)
-            displayed_value = font.render(str(self.value),True,())
-            displayed_value_rect = displayed_value.get_rect(center=(self.col * self.SQUARE_SIZE_VERT + self.SQUARE_SIZE_VERT // 2, self.row * self.SQUARE_SIZE_HORZ + self.SQUARE_SIZE_HORZ // 2))
+            displayed_value = font.render(str(self.value),True,(242, 158, 22))
+            displayed_value_rect = displayed_value.get_rect(center=(self.col * self.CELL_SIZE_VERT + self.CELL_SIZE_VERT // 2, self.row * self.CELL_SIZE_HORZ + self.CELL_SIZE_HORZ // 2))
             self.screen.blit(displayed_value,displayed_value_rect)

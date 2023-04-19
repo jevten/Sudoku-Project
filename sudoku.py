@@ -58,6 +58,8 @@ while True:
             screen.fill(bg_color)
             board = Board(600, 600, screen, "easy")
             board.draw()
+            while True:
+                pygame.display.update()
 
 
         if game_state == "medium":
