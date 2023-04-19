@@ -34,7 +34,6 @@ def draw_start_menu():
     screen.blit(title, (600/2 - title.get_width() / 2, 175- title.get_height()))
     screen.blit(easy_mode, (65, 515))
     pygame.display.update()
-    print(300-medium_mode.get_width()/2-15)
 
 while True:
     #event handler
@@ -58,8 +57,9 @@ while True:
             screen.fill(bg_color)
             board = Board(600, 600, screen, "easy")
             board.draw()
+            pygame.display.update()
             while True:
-                pygame.display.update()
+                pass
 
 
         if game_state == "medium":

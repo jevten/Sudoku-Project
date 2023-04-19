@@ -25,6 +25,7 @@ class Board:
         for i in range(0,9):
             for j in range(0,9):
                 self.list_of_cells[i][j] = Cell(self.board.get_board()[i][j], i, j ,self.screen)
+        self.selected_cell = (0,0)
 
 
 
@@ -41,11 +42,12 @@ class Board:
             for j in range(0,9):
                 self.list_of_cells[i][j].draw()
 
-    def select(self,row,col):
+    def select(self, row, col):
         for i in range(0,2):
             pygame.draw.line(self.screen,self.LINE_COLOR_SELECT,(col*600/9,(row + i)*600/9),(600/9*(col+1), (row + i)*600/9),5)
         for i in range(0, 2):
             pygame.draw.line(self.screen, self.LINE_COLOR_SELECT, ((col + i) * 600 / 9, row * 600 / 9),(600/9*(col+i),(row+1)*600/9),5)
+        self.selected_cell = (row,col)
 
     def click(self, x, y):
         if x>600 and x<0 and y>600 and y<0:
@@ -59,4 +61,56 @@ class Board:
                 y=i
         result = (row,col)
         return result
+
+    def clear(self):
+        i, j = self.selected_cell
+        self.list_of_cells[i][j] = Cell(0,i,j,self.screen)
+
+    def sketch(self,value):
+        i, j = self.selected_cell
+        self.list_of_cells[i][j].set_sketched_value(value)
+        self.list_of_cells[i][j].draw_sketched_value()
+
+    def place_number(self,value):
+        i, j = self.selected_cell
+        self.list_of_cells[i][j].set_cell_value(value)
+        self.list_of_cells[i][j].draw()
+
+    def reset_to_original(self):
+        for i in range(0,9):
+            for j in range(0,9):
+                self.list_of_cells[i][j] = Cell(self.board.get_board()[i][j], i, j ,self.screen)
+
+    def is_full(self):
+        count = 0
+        for i in range(0,9):
+            for j in range(0,9):
+                if self.list_of_cells[i][j].get_value() == 0:
+                    count+=1
+        if count >0:
+            return False
+        return True
+
+    def update_board(self):
+        for i in range(0,9):
+            for j in range(0,9):
+                self.board.get_board()[i][j] = self.list_of_cells[i][j].get_value()
+
+    def find_empty(self):
+        for i in range(0,9):
+            for j in range(0,9):
+                if self.list_of_cells[i][j].get_value()==0:
+                    result = (i,j)
+                    return result
+        return None
+
+    def check_board(self):
+        for i in range(0,9):
+            for j in range(0,9):
+                if self.board.get_board().SudokuGenerator.is_valid(i,j) == False:
+                    return False
+        return True
+
+
+
 
