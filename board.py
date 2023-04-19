@@ -2,7 +2,7 @@ from sudoku_generator import SudokuGenerator
 from cell import Cell
 import pygame
 
-class Board:
+class Board():
     def __init__(self, width, height, screen, difficulty):
         self.list_of_cells =[[0 for x in range(0,9)]for y in range(0,9)]
         self.width = width
@@ -15,7 +15,7 @@ class Board:
         self.LINE_COLOR_CELL = (242, 158, 22)
         self.LINE_COLOR_SELECT = (232, 5, 16)
         if difficulty == "easy":
-            self.board = SudokuGenerator(9,30)
+            self.board = SudokuGenerator(9,1)
         if difficulty == "medium":
             self.board = SudokuGenerator(9,40)
         if difficulty == "hard":
@@ -42,6 +42,9 @@ class Board:
         for i in range (0,9):
             for j in range(0,9):
                 self.list_of_cells[i][j].draw()
+
+        def get_list_of_cells():
+            return self.list_of_cells
 
     def select(self, row, col):
         for i in range(0,2):
@@ -101,6 +104,7 @@ class Board:
         for i in range(0,9):
             for j in range(0,9):
                 self.board.get_board()[i][j] = self.list_of_cells[i][j].get_value()
+        self.board.print_board()
 
     def find_empty(self):
         for i in range(0,9):
@@ -111,10 +115,27 @@ class Board:
         return None
 
     def check_board(self):
-        for i in range(0,9):
-            for j in range(0,9):
-                if self.board.is_valid(i,j,self.board.get_board()[i][j]) == False:
+        # Check rows
+        for row in self.board.get_board():
+            if set(row) != set(range(1, 10)):
+                return False
+
+        # Check columns
+        for col in range(9):
+            if set(self.board.get_board()[row][col] for row in range(9)) != set(range(1, 10)):
+                return False
+
+        # Check subgrids
+        for row_start in range(0, 9, 3):
+            for col_start in range(0, 9, 3):
+                subgrid = [
+                    self.board.get_board()[row][col]
+                    for row in range(row_start, row_start + 3)
+                    for col in range(col_start, col_start + 3)
+                ]
+                if set(subgrid) != set(range(1, 10)):
                     return False
+
         return True
 
 

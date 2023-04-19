@@ -149,10 +149,13 @@ while True:
                         pygame.draw.rect(screen, (193, 237, 247),pygame.Rect(col * 600 / 9 + 2, row * 600 / 9 + 2, 600 / 9 - 4, 600 / 9 - 4))
                         easy_board.list_of_cells[row][col].draw()
             if easy_board.is_full():
-                if easy_board.check_board():
-                    game_state = "win"
-                else:
-                    game_state = "lose"
+               easy_board.update_board()
+               if easy_board.check_board():
+                   game_state = "win"
+               else:
+                   game_state = "lose"
+
+
             pygame.display.update()
 
 
