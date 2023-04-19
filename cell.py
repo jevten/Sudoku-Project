@@ -19,6 +19,9 @@ class Cell:
     def get_value(self):
         return self.value
 
+    def get_sketched_Value(self):
+        return self.sketched_value
+
     def draw(self):
         if self.value != 0:
             font = pygame.font.SysFont('arial', 40)
