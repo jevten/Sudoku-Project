@@ -15,7 +15,7 @@ class Board():
         self.LINE_COLOR_CELL = (242, 158, 22)
         self.LINE_COLOR_SELECT = (232, 5, 16)
         if difficulty == "easy":
-            self.board = SudokuGenerator(9,1)
+            self.board = SudokuGenerator(9,30)
         if difficulty == "medium":
             self.board = SudokuGenerator(9,40)
         if difficulty == "hard":

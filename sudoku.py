@@ -164,10 +164,25 @@ while True:
             if count == 0:
                 screen.fill(bg_color)
                 medium_board.draw()
+                draw_bottom_menu()
                 count += 1
             if event.type == pygame.MOUSEBUTTONDOWN:
                 medium_board.draw()
                 x,y = event.pos
+                if y>600:
+                    if x<200:
+                        for i in range(0,9):
+                            for j in range(0,9):
+                                medium_board.list_of_cells[i][j].set_cell_value(medium_board.original_board[i][j])
+                        screen.fill(bg_color)
+                        medium_board.draw()
+                        draw_bottom_menu()
+                    if x>200 and x<400:
+                        game_state = "start_menu"
+                        count = 0
+                    if x>400:
+                        pygame.quit()
+                        sys.exit()
                 row, col = medium_board.click(x,y)
                 medium_board.select(row,col)
             if event.type == pygame.KEYDOWN:
@@ -216,12 +231,87 @@ while True:
                         pygame.draw.rect(screen, (193, 237, 247),pygame.Rect(col * 600 / 9 + 2, row * 600 / 9 + 2, 600 / 9 - 4, 600 / 9 - 4))
                         medium_board.list_of_cells[row][col].draw()
             if medium_board.is_full():
+                medium_board.update_board()
                 if medium_board.check_board():
                     game_state = "win"
                 else:
                     game_state = "lose"
         if game_state == "hard":
-            pass
+            if count == 0:
+                screen.fill(bg_color)
+                hard_board.draw()
+                draw_bottom_menu()
+                count += 1
+            if event.type == pygame.MOUSEBUTTONDOWN:
+                hard_board.draw()
+                x,y = event.pos
+                if y>600:
+                    if x<200:
+                        for i in range(0,9):
+                            for j in range(0,9):
+                                hard_board.list_of_cells[i][j].set_cell_value(hard_board.original_board[i][j])
+                        screen.fill(bg_color)
+                        hard_board.draw()
+                        draw_bottom_menu()
+                    if x>200 and x<400:
+                        game_state = "start_menu"
+                        count = 0
+                    if x>400:
+                        pygame.quit()
+                        sys.exit()
+                row, col = hard_board.click(x,y)
+                hard_board.select(row,col)
+            if event.type == pygame.KEYDOWN:
+                if hard_board.original_board[row][col]==0:
+                    if event.key == pygame.K_1:
+                        pygame.draw.rect(screen,(193, 237, 247), pygame.Rect(col*600/9+2,row*600/9+2,600/9-4,600/9-4))
+                        hard_board.clear()
+                        hard_board.sketch(1)
+                    if event.key == pygame.K_2:
+                        pygame.draw.rect(screen, (193, 237, 247),pygame.Rect(col * 600 / 9 + 2, row * 600 / 9 + 2, 600 / 9-4, 600 / 9-4))
+                        hard_board.clear()
+                        hard_board.sketch(2)
+                    if event.key == pygame.K_3:
+                        pygame.draw.rect(screen, (193, 237, 247),pygame.Rect(col * 600 / 9 + 2, row * 600 / 9 + 2, 600 / 9 - 4, 600 / 9 - 4))
+                        hard_board.clear()
+                        hard_board.sketch(3)
+                    if event.key == pygame.K_4:
+                        pygame.draw.rect(screen, (193, 237, 247),pygame.Rect(col * 600 / 9 + 2, row * 600 / 9 + 2, 600 / 9 - 4, 600 / 9 - 4))
+                        hard_board.clear()
+                        hard_board.sketch(4)
+                    if event.key == pygame.K_5:
+                        pygame.draw.rect(screen, (193, 237, 247),pygame.Rect(col * 600 / 9 + 2, row * 600 / 9 + 2, 600 / 9 - 4, 600 / 9 - 4))
+                        hard_board.clear()
+                        hard_board.sketch(5)
+                    if event.key == pygame.K_6:
+                        pygame.draw.rect(screen, (193, 237, 247),pygame.Rect(col * 600 / 9 + 2, row * 600 / 9 + 2, 600 / 9 - 4, 600 / 9 - 4))
+                        hard_board.clear()
+                        hard_board.sketch(6)
+                    if event.key == pygame.K_7:
+                        pygame.draw.rect(screen, (193, 237, 247),pygame.Rect(col * 600 / 9 + 2, row * 600 / 9 + 2, 600 / 9 - 4, 600 / 9 - 4))
+                        hard_board.clear()
+                        hard_board.sketch(7)
+                    if event.key == pygame.K_8:
+                        pygame.draw.rect(screen, (193, 237, 247),pygame.Rect(col * 600 / 9 + 2, row * 600 / 9 + 2, 600 / 9 - 4, 600 / 9 - 4))
+                        hard_board.clear()
+                        hard_board.sketch(8)
+                    if event.key == pygame.K_9:
+                        pygame.draw.rect(screen, (193, 237, 247),pygame.Rect(col * 600 / 9 + 2, row * 600 / 9 + 2, 600 / 9 - 4, 600 / 9 - 4))
+                        hard_board.clear()
+                        hard_board.sketch(9)
+                    if event.key == pygame.K_0:
+                        pygame.draw.rect(screen, (193, 237, 247),pygame.Rect(col * 600 / 9 + 2, row * 600 / 9 + 2, 600 / 9 - 4, 600 / 9 - 4))
+                        hard_board.clear()
+                    if event.key == pygame.K_RETURN:
+                        hard_board.list_of_cells[row][col].set_cell_value(hard_board.list_of_cells[row][col].get_sketched_Value())
+                        pygame.draw.rect(screen, (193, 237, 247),pygame.Rect(col * 600 / 9 + 2, row * 600 / 9 + 2, 600 / 9 - 4, 600 / 9 - 4))
+                        hard_board.list_of_cells[row][col].draw()
+            if hard_board.is_full():
+               hard_board.update_board()
+               if hard_board.check_board():
+                   game_state = "win"
+               else:
+                   game_state = "lose"
 
         if game_state == "lose":
             print("lose")
