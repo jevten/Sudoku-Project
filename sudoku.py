@@ -14,7 +14,7 @@ easy_board = Board(600, 600, screen, "easy")
 medium_board = Board(600, 600, screen, "medium")
 hard_board = Board(600, 600, screen, "hard")
 font = pygame.font.SysFont('arial', 30)
-reset_message = font.render("Reset",True,(242, 158, 22))
+reset_message = font.render("Reset", True, (242, 158, 22))
 
 
 
@@ -46,6 +46,20 @@ def draw_start_menu():
     screen.blit(easy_mode, (65, 515))
     pygame.display.update()
 
+def draw_bottom_menu():
+    font = pygame.font.SysFont('arial', 30)
+    reset_message = font.render("Reset", True, (242, 158, 22))
+    pygame.draw.rect(screen, (0, 0, 0), pygame.Rect(200-reset_message.get_width(),665-reset_message.get_height(),reset_message.get_width(),reset_message.get_height()))
+    screen.blit(reset_message, (200 - reset_message.get_width(), 665 - reset_message.get_height()))
+
+    restart_message = font.render("Restart", True,(242, 158, 22))
+    pygame.draw.rect(screen, (0,0,0), pygame.Rect(300-restart_message.get_width()//2,665-reset_message.get_height(),restart_message.get_width(),restart_message.get_height()))
+    screen.blit(restart_message,(300-restart_message.get_width()//2,665-restart_message.get_height()))
+
+    exit_message = font.render("Exit", True, (242, 158, 22))
+    pygame.draw.rect(screen, (0, 0, 0), pygame.Rect(400,665-reset_message.get_height(),exit_message.get_width(),exit_message.get_height()))
+    screen.blit(exit_message,(400,665-exit_message.get_height()))
+
 while True:
     #event handler
     for event in pygame.event.get():
@@ -68,11 +82,25 @@ while True:
             if count == 0:
                 screen.fill(bg_color)
                 easy_board.draw()
-                screen.blit(screen,())
+                draw_bottom_menu()
                 count += 1
             if event.type == pygame.MOUSEBUTTONDOWN:
                 easy_board.draw()
                 x,y = event.pos
+                if y>600:
+                    if x<200:
+                        for i in range(0,9):
+                            for j in range(0,9):
+                                easy_board.list_of_cells[i][j].set_cell_value(easy_board.original_board[i][j])
+                        screen.fill(bg_color)
+                        easy_board.draw()
+                        draw_bottom_menu()
+                    if x>200 and x<400:
+                        game_state = "start_menu"
+                        count = 0
+                    if x>400:
+                        pygame.quit()
+                        sys.exit()
                 row, col = easy_board.click(x,y)
                 easy_board.select(row,col)
             if event.type == pygame.KEYDOWN:
