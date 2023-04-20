@@ -92,10 +92,10 @@ while True:
                 if event.key == pygame.K_RIGHT and col<8:
                     col+=1
                     easy_board.select(row, col)
-                if event.key == pygame.K_LEFT and col > 1:
+                if event.key == pygame.K_LEFT and col > 0:
                     col-=1
                     easy_board.select(row,col)
-                if event.key == pygame.K_UP and row > 1:
+                if event.key == pygame.K_UP and row > 0:
                     row -= 1
                     easy_board.select(row, col)
                 if event.key == pygame.K_DOWN and row < 8:
@@ -206,6 +206,21 @@ while True:
                 row, col = medium_board.click(x,y)
                 medium_board.select(row,col)
             if event.type == pygame.KEYDOWN:
+                medium_board.draw()
+                if event.key == pygame.K_RIGHT and col<8:
+                    col+=1
+                    medium_board.select(row, col)
+                if event.key == pygame.K_LEFT and col > 0:
+                    col-=1
+                    medium_board.select(row,col)
+                if event.key == pygame.K_UP and row > 0:
+                    row -= 1
+                    medium_board.select(row, col)
+                if event.key == pygame.K_DOWN and row < 8:
+                    row += 1
+                    medium_board.select(row, col)
+
+            if event.type == pygame.KEYDOWN:
                 if medium_board.original_board[row][col]==0:
                     if event.key == pygame.K_1:
                         pygame.draw.rect(screen,(193, 237, 247), pygame.Rect(col*600/9+2,row*600/9+2,600/9-4,600/9-4))
@@ -281,6 +296,22 @@ while True:
                         sys.exit()
                 row, col = hard_board.click(x,y)
                 hard_board.select(row,col)
+
+            if event.type == pygame.KEYDOWN:
+                hard_board.draw()
+                if event.key == pygame.K_RIGHT and col<8:
+                    col+=1
+                    hard_board.select(row, col)
+                if event.key == pygame.K_LEFT and col > 0:
+                    col-=1
+                    hard_board.select(row,col)
+                if event.key == pygame.K_UP and row > 0:
+                    row -= 1
+                    hard_board.select(row, col)
+                if event.key == pygame.K_DOWN and row < 8:
+                    row += 1
+                    hard_board.select(row, col)
+
             if event.type == pygame.KEYDOWN:
                 if hard_board.original_board[row][col]==0:
                     if event.key == pygame.K_1:
