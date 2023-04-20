@@ -365,9 +365,37 @@ while True:
                    game_state = "lose"
 
         if game_state == "lose":
-            print("lose")
+            bg_img = pygame.image.load("sudokupic.webp")
+            screen.fill((0, 0, 0))
+            # display background image
+            screen.blit(bg_img, (0, 0))
+            lose_font = pygame.font.SysFont('arial', 70)
+            lose_message = lose_font.render('Game Over :(', True, (0, 0, 0))
+            screen.blit(lose_message,(300 - lose_message.get_width()/2, 300 - lose_message.get_height()))
+            restart_message = lose_font.render("Restart", True, (242, 158, 22))
+            pygame.draw.rect(screen, (0, 0, 0),pygame.Rect(300 - restart_message.get_width() // 2, 500 - reset_message.get_height(), restart_message.get_width(), restart_message.get_height()))
+            screen.blit(restart_message,(300-restart_message.get_width()/2,500-restart_message.get_height()/2))
+            if event.type == pygame.MOUSEBUTTONDOWN:
+                for i in range(0, 9):
+                    for j in range(0, 9):
+                        easy_board.list_of_cells[i][j].set_cell_value(easy_board.original_board[i][j])
+                        medium_board.list_of_cells[i][j].set_cell_value(medium_board.original_board[i][j])
+                        hard_board.list_of_cells[i][j].set_cell_value(hard_board.original_board[i][j])
+                game_state = "start_menu"
+                count = 0
 
         if game_state == "win":
-            print("win")
-
+            bg_img = pygame.image.load("sudokupic.webp")
+            screen.fill((0, 0, 0))
+            # display background image
+            screen.blit(bg_img, (0, 0))
+            lose_font = pygame.font.SysFont('arial', 70)
+            lose_message = lose_font.render('Game Won!', True, (0, 0, 0))
+            screen.blit(lose_message, (300 - lose_message.get_width() / 2, 300 - lose_message.get_height()))
+            restart_message = lose_font.render("Exit", True, (242, 158, 22))
+            pygame.draw.rect(screen, (0, 0, 0),pygame.Rect(300 - restart_message.get_width() // 2, 500 - reset_message.get_height(),restart_message.get_width(), restart_message.get_height()))
+            screen.blit(restart_message,(300 - restart_message.get_width() / 2, 500 - restart_message.get_height() / 2))
+            if event.type == pygame.MOUSEBUTTONDOWN:
+                pygame.quit()
+                sys.exit()
         pygame.display.update()

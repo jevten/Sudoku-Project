@@ -15,18 +15,21 @@ class Board():
         self.LINE_COLOR_CELL = (242, 158, 22)
         self.LINE_COLOR_SELECT = (232, 5, 16)
         if difficulty == "easy":
-            self.board = SudokuGenerator(9,30)
+            self.board = SudokuGenerator(9,1)
         if difficulty == "medium":
             self.board = SudokuGenerator(9,40)
         if difficulty == "hard":
             self.board = SudokuGenerator(9,50)
         self.board.fill_values()
-        self.original_board = self.board.get_board()
         self.board.remove_cells()
         for i in range(0,9):
             for j in range(0,9):
                 self.list_of_cells[i][j] = Cell(self.board.get_board()[i][j], i, j ,self.screen)
         self.selected_cell = (0,0)
+        self.original_board = [[0 for x in range(0,9)]for y in range(0,9)]
+        for i in range(0,9):
+            for j in range(0,9):
+                self.original_board[i][j] = self.board.get_board()[i][j]
 
 
 
