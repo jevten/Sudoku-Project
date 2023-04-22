@@ -22,10 +22,13 @@ class SudokuGenerator:
 	Return:
 	None
     '''
+    #constructor for the class
     def __init__(self, row_length, removed_cells):
         self.row_length = row_length
         self.removed_cells = removed_cells
+        #length of the 9 boxes on the board
         self.box_length = int(math.sqrt(self.row_length))
+        #2d list initalization for the board
         self.board = [[0 for _ in range(row_length)]for _ in range(row_length)]
 
 
@@ -36,6 +39,7 @@ class SudokuGenerator:
 	Return: list[list]
     '''
     def get_board(self):
+        #reutrn the board list
         return self.board
 
     '''
@@ -46,6 +50,7 @@ class SudokuGenerator:
 	Return: None
     '''
     def print_board(self):
+        #print board in sudoku format by iterating through each element in each list
         for i in range(self.row_length):
             for j in range(self.row_length):
                 print(self.board[i][j], end=" ")
@@ -61,7 +66,9 @@ class SudokuGenerator:
 	
 	Return: boolean
     '''
+    #function to check if a number is valid in the row it will be placed in
     def valid_in_row(self, row, num):
+        #iterate though the row by changing second element in the list checking if a number is equal
         for i in range(self.row_length):
             if num == self.board[row][i]:
                 return False
@@ -77,7 +84,9 @@ class SudokuGenerator:
 	
 	Return: boolean
     '''
+    #function to check if a number is valid in its column
     def valid_in_col(self, col, num):
+        #iterate though the column by changing first element in the list checking if a number is equal
         for i in range(self.row_length):
             if num == self.board[i][col]:
                 return False
@@ -95,7 +104,9 @@ class SudokuGenerator:
 
 	Return: boolean
     '''
+    #function to check if a number is valid in its box on the board, 9 boxes 3x3
     def valid_in_box(self, row_start, col_start, num):
+        #start by ensuring that the check starts on the first value in the box
         if row_start > 3 and row_start < 6:
             row_start = 3
         if row_start > 0 and row_start < 3:
@@ -108,6 +119,7 @@ class SudokuGenerator:
             col_start = 3
         if col_start > 6 and col_start < 9:
             col_start = 6
+        #once the first value is selected iterate though the box using the box length and checking if equal
         for i in range(self.box_length):
             for j in range(self.box_length):
                 if self.board[row_start+i][col_start+j] == num:
@@ -125,7 +137,9 @@ class SudokuGenerator:
 
 	Return: boolean
     '''
+    #function to determine if a single elment is valid
     def is_valid(self, row, col, num):
+        #use all the valid tests, if one returns false then the value is not valid
         if self.valid_in_box(row,col,num) == False:
             return False
         if self.valid_in_row(row,num) == False:
@@ -144,14 +158,18 @@ class SudokuGenerator:
 
 	Return: None
     '''
+    #function to fill boxes when initializing board
     def fill_box(self, row_start, col_start):
         value = 0
+        #iterate through the rows and cols in the box
         for i in range(int(self.box_length)):
             for j in range(int(self.box_length)):
                 while True:
+                    #create rnadom number 1-9
                     value = random.randint(1,9)
                     if self.valid_in_box(row_start,col_start,value):
                         break
+                #add the random int 1-9 if the value is valid
                 self.board[row_start + i][col_start + j] = value
 
     
@@ -162,7 +180,9 @@ class SudokuGenerator:
 	Parameters: None
 	Return: None
     '''
+    #function to fill the box diagnoally
     def fill_diagonal(self):
+        #using a for loop the steps up the box length every iteration to fill boxes diagnolly rather then every box
         for i in range(0, self.row_length, int(self.box_length)):
             self.fill_box(i,i)
 
@@ -230,8 +250,10 @@ class SudokuGenerator:
 	Parameters: None
 	Return: None
     '''
+    #function to remove values after a board is made
     def remove_cells(self):
         count = self.removed_cells
+        #randomly select values for the rows and cols to remove values if a vlue is already 0 it is checked and not removed again
         while count !=0:
             x = random.randint(0,8)
             y = random.randint(0,8)
